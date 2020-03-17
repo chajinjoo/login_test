@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:logintest/helper/login_background.dart';
+import 'package:provider/provider.dart';
+import '../data/join_or_login.dart';
+import '../helper/login_background.dart';
 
 class AuthPage extends StatelessWidget {
   // 폼에 부여할 수 있는 유니크한 글로벌 키를 생성한다.
@@ -17,7 +21,12 @@ class AuthPage extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          CustomPaint(),
+          //CustomPaint : 캔버스를 제공하고 페인트 명령을 실행
+          CustomPaint(
+            size: size,
+            painter: LoginBackground(
+                isJoin: Provider.of<JoinOrLogin>(context).isJoin),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -30,7 +39,10 @@ class AuthPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: size.height * 0.1),
-              Text('Don\'t Have an Account? Create One'),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Don\'t Have an Account? Create One'),
+              ),
               SizedBox(height: size.height * 0.05),
             ],
           ),
@@ -47,7 +59,7 @@ class AuthPage extends StatelessWidget {
           child: FittedBox(
             fit: BoxFit.contain,
             child: CircleAvatar(
-              backgroundImage: AssetImage('assets/bear.gif'),
+              backgroundImage: AssetImage('assets/rabbit.gif'),
             ),
           ),
         ),
